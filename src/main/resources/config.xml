@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- context:annotation-config is used to activate all annotations-->
+    <!--<context:annotation-config/>-->
+    <!-- packageName.className is used to just activate only PostConstruct and PreDestroy Annotations-->
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+
+    <bean class="com.constructorInjection.Address" name="addressPerson1">
+        <constructor-arg>
+            <value>Al Raheem Garden lahore</value>
+        </constructor-arg>
+        <constructor-arg>
+            <value>03087652456</value>
+        </constructor-arg>
+    </bean>
+
+    <bean class="com.constructorInjection.Person" name="person1">
+        <constructor-arg>
+            <value>Amna</value>
+        </constructor-arg>
+        <constructor-arg type="int">
+            <value>12</value>
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="addressPerson1"></ref>
+        </constructor-arg>
+        <constructor-arg>
+            <list>
+                <value>Java Core</value>
+                <value>Spring Core</value>
+                <value>Spring Boot</value>
+                <value>Spring MVC</value>
+                <value>Spring JDBC</value>
+                <value>Spring Security</value>
+            </list>
+        </constructor-arg>
+    </bean>
+    <bean class="com.constructorInjection.Code" name="ambiguityProblem">
+        <constructor-arg type="int" index="1">
+            <value>12</value>
+        </constructor-arg>
+        <constructor-arg type="int" index="0">
+            <value>20</value>
+        </constructor-arg>
+    </bean>
+</beans>
